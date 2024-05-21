@@ -6,10 +6,6 @@ A personal planner that uses an API to incorporate weather information.
 The website is a weather program that allows users to select a city from a predefined list. Once a city is selected, the user can provide notes and descriptions related to the weather for that location. Additionally, the user can choose to click on the search button, which will trigger an API call from the open-meteo website to retrieve weather data for the past four hours. The returned weather data can be saved in the database and presented in visually appealing ways.
 
 ### Built With
-* **Flask**
-* **Docker**
-* **Bootstrap**
-* **JQuery**
 
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 * [![Flask][flask.palletsprojects.com]][Flask-url]
