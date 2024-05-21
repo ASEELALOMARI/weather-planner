@@ -1,0 +1,73 @@
+            <!-- weather data explanations
+
+            weather_data[0]= for Date and time
+            weather_data[1]= for temperature 
+            weather_data[2]= for daylight or night
+            weather_data[3]= for weather decryptions
+            weather_data[4]= for Precipitation
+            weather_data[5]= for wind speed
+
+            -->
+    <div class="container py-5 h-100">
+        <div class="d-flex">
+            <p class="text3 text-center mb-4 me-2"> Weather Information for {{ result.city_name }}:</p>
+            <button type="button" name="save" value="true" id="saveButton" class="form-btn col-md-2 ms-md-auto">Save</button>
+        </div>
+        <br>
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-8 col-lg-6 col-xl-4">
+                <div class="card" style="color: #4B515D; border-radius: 35px;">
+                    <div class="card-body p-4">
+                        <div class="d-flex mb-4">
+                            <h6 class="flex-grow-1">{{ result.city_name }}</h6>
+                            <h6>{{ result.weather_data[0] }}</h6>
+                        </div>
+                        <div class="d-flex flex-column text-center mt-5 mb-4">
+                            <h6 class="display-4 mb-0 font-weight-bold" style="color: #1C2331;">{{ result.weather_data[1] }}°C </h6>
+                            <span class="small" style="color: #868B94">{{ result.weather_data[3] }}</span>
+                        </div>
+                        <div class="d-flex align-items-center mt-5 ms-1">
+                            <div class="flex-grow-1" style="font-size: 1rem;">
+                                <div><i class="fas fa-wind fa-fw" style="color: #868B94;"></i> <span class="ms-2">{{ result.weather_data[5] }} m/s</span></div>
+                                <div><i class="fas fa-tint fa-fw" style="color: #868B94;"></i> <span class="ms-2">{{ result.weather_data[4] }}% </span></div>
+                            </div>
+                            <div class="mb-3">
+                                <img src="{{ result.img_URL }}" alt="Weather Image" width="100px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#saveButton").click(function () {
+                        saveData();
+                    });
+            function saveData() {
+                console.log("button has been clicked")
+                $.ajax({
+                    type: "POST",
+                    url: "/save",
+                    success: function (response) {
+                        if (response.hasOwnProperty('status')){
+                            alert(response['message']);
+                            // Handle success (if needed)
+                        } else {
+                            console.error("Invalid response from the server")
+                            alert(response['message']);
+                        }
+                    },
+                    error: function (error) {
+                        console.error(error);
+                        // Handle error (if needed)
+                    }
+                });
+            }
+        });
+        </script>
